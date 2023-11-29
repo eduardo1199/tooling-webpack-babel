@@ -1,7 +1,14 @@
-const name = 'Eduardo';
+import { getDataGitHub, Image } from './get-data-github'
 
-const obj = {
-  name,
-}
+let cats;
 
-console.log(obj)
+(async () => {
+  const data = await getDataGitHub()
+
+  console.log(data)
+
+  const image = new Image(data[0].url, data[0].id)
+
+  console.log(image.url)
+})()
+
