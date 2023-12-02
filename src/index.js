@@ -1,2 +1,1 @@
-
-import './assets/global.css';
+import './assets/global.css'
