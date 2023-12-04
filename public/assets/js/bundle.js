@@ -2,6 +2,138 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/modules/generate-cpf.js":
+/*!*************************************!*\
+  !*** ./src/modules/generate-cpf.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GenerateCPF: () => (/* binding */ GenerateCPF)
+/* harmony export */ });
+/* harmony import */ var _validate_cpf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validate_cpf */ "./src/modules/validate_cpf.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+var GenerateCPF = /*#__PURE__*/function () {
+  function GenerateCPF() {
+    _classCallCheck(this, GenerateCPF);
+  }
+  _createClass(GenerateCPF, [{
+    key: "rand",
+    value: function rand() {
+      var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100000000;
+      var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 999999999;
+      var cpf = Math.floor(Math.random() * (max - min) + min);
+      var parsedCpfString = String(cpf);
+      return parsedCpfString;
+    }
+  }, {
+    key: "generate",
+    value: function generate() {
+      var cpfWithoutDigit = this.rand();
+      var firstDigit = _validate_cpf__WEBPACK_IMPORTED_MODULE_0__.ValidateCPF.geraDigito(cpfWithoutDigit);
+      var secondDigit = _validate_cpf__WEBPACK_IMPORTED_MODULE_0__.ValidateCPF.geraDigito(cpfWithoutDigit + firstDigit);
+      var newCpf = cpfWithoutDigit + firstDigit + secondDigit;
+      return this.format(newCpf);
+    }
+  }, {
+    key: "format",
+    value: function format(cpf) {
+      var formatCpf = cpf.slice(0, 3) + '.' + cpf.slice(3, 6) + '.' + cpf.slice(6, 9) + '-' + cpf.slice(9, 11);
+      return formatCpf;
+    }
+  }]);
+  return GenerateCPF;
+}();
+
+/***/ }),
+
+/***/ "./src/modules/validate_cpf.js":
+/*!*************************************!*\
+  !*** ./src/modules/validate_cpf.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ValidateCPF: () => (/* binding */ ValidateCPF)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+// 705.484.450-52 070.987.720-03
+var ValidateCPF = /*#__PURE__*/function () {
+  function ValidateCPF(cpfSent) {
+    _classCallCheck(this, ValidateCPF);
+    Object.defineProperty(this, 'cpfLimpo', {
+      writable: false,
+      enumerable: true,
+      configurable: false,
+      value: cpfSent.replace(/\D+/g, '')
+    });
+  }
+  _createClass(ValidateCPF, [{
+    key: "\xE9Sequ\xEAncia",
+    value: function éSequência() {
+      return this.cpfLimpo.charAt(0).repeat(11) === this.cpfLimpo;
+    }
+  }, {
+    key: "geraNovoCpf",
+    value: function geraNovoCpf() {
+      var cpfSemDigitos = this.cpfLimpo.slice(0, -2);
+      var digito1 = ValidaCPF.geraDigito(cpfSemDigitos);
+      var digito2 = ValidaCPF.geraDigito(cpfSemDigitos + digito1);
+      this.novoCPF = cpfSemDigitos + digito1 + digito2;
+    }
+  }, {
+    key: "valida",
+    value: function valida() {
+      if (!this.cpfLimpo) return false;
+      if (typeof this.cpfLimpo !== 'string') return false;
+      if (this.cpfLimpo.length !== 11) return false;
+      if (this.éSequência()) return false;
+      this.geraNovoCpf();
+      return this.novoCPF === this.cpfLimpo;
+    }
+  }], [{
+    key: "geraDigito",
+    value: function geraDigito(cpfSemDigitos) {
+      var total = 0;
+      var reverso = cpfSemDigitos.length + 1;
+      var _iterator = _createForOfIteratorHelper(cpfSemDigitos),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var stringNumerica = _step.value;
+          total += reverso * Number(stringNumerica);
+          reverso--;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      var digito = 11 - total % 11;
+      return digito <= 9 ? String(digito) : '0';
+    }
+  }]);
+  return ValidateCPF;
+}();
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/assets/global.css":
 /*!*********************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/assets/global.css ***!
@@ -36,7 +168,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `* {
 
 .main h1 {
   color: white;
-}`, "",{"version":3,"sources":["webpack://./src/assets/global.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,aAAa;;EAEb,iBAAiB;AACnB;;AAEA;EACE,YAAY;AACd","sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.main {\r\n  width: 100%;\r\n  height: 100vh;\r\n\r\n  background: black;\r\n}\r\n\r\n.main h1 {\r\n  color: white;\r\n}"],"sourceRoot":""}]);
+}
+
+.result-cpf {
+  margin-top: 2rem;
+
+  color: white;
+  font-weight: bold;
+}`, "",{"version":3,"sources":["webpack://./src/assets/global.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,aAAa;;EAEb,iBAAiB;AACnB;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,gBAAgB;;EAEhB,YAAY;EACZ,iBAAiB;AACnB","sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.main {\r\n  width: 100%;\r\n  height: 100vh;\r\n\r\n  background: black;\r\n}\r\n\r\n.main h1 {\r\n  color: white;\r\n}\r\n\r\n.result-cpf {\r\n  margin-top: 2rem;\r\n\r\n  color: white;\r\n  font-weight: bold;\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -563,8 +702,15 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_global_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/global.css */ "./src/assets/global.css");
+/* harmony import */ var _modules_generate_cpf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/generate-cpf */ "./src/modules/generate-cpf.js");
+/* harmony import */ var _assets_global_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/global.css */ "./src/assets/global.css");
 
+
+(function () {
+  var generate = new _modules_generate_cpf__WEBPACK_IMPORTED_MODULE_0__.GenerateCPF();
+  var elementGenerate = document.querySelector('.result-cpf');
+  elementGenerate.innerHTML = generate.generate();
+})();
 })();
 
 /******/ })()

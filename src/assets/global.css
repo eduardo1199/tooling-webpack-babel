@@ -14,3 +14,10 @@
 .main h1 {
   color: white;
 }
+
+.result-cpf {
+  margin-top: 2rem;
+
+  color: white;
+  font-weight: bold;
+}
