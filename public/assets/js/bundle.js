@@ -54,6 +54,110 @@ var GenerateCPF = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/modules/password-methods.js":
+/*!*****************************************!*\
+  !*** ./src/modules/password-methods.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PasswordMethods: () => (/* binding */ PasswordMethods)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var PasswordMethods = /*#__PURE__*/function () {
+  function PasswordMethods(password) {
+    _classCallCheck(this, PasswordMethods);
+    _defineProperty(this, "password", '');
+    _defineProperty(this, "isAddedNumbers", false);
+    _defineProperty(this, "isAddedUpperCaseLetter", false);
+    _defineProperty(this, "isAddedLowerCaseLetter", false);
+    _defineProperty(this, "isAddedSymbols", false);
+    this.password = password;
+  }
+  _createClass(PasswordMethods, [{
+    key: "generatePassword",
+    value: function generatePassword(maxQuantityOfCharacters) {
+      for (var i = 0; i < maxQuantityOfCharacters; i++) {
+        if (this.isAddedNumbers) {
+          this.password += this.generateNumbers();
+        }
+        if (this.isAddedUpperCaseLetter) {
+          this.password += this.generateUpperCaseLetter();
+        }
+        if (this.isAddedLowerCaseLetter) {
+          this.password += this.isAddedLowerCaseLetter();
+        }
+        if (this.isAddedSymbols) {
+          this.password += this.isAddedSymbols();
+        }
+      }
+      return this.password;
+    }
+  }, {
+    key: "generateNumbers",
+    value: function generateNumbers() {
+      var number = Math.floor(Math.random() * (10 - 0) + 0);
+      return String(number);
+    }
+  }, {
+    key: "generateUpperCaseLetter",
+    value: function generateUpperCaseLetter() {
+      var number = Math.floor(Math.random() * (90 - 65) + 65);
+      var letterUpperCase = String.fromCharCode(number);
+      return letterUpperCase;
+    }
+  }, {
+    key: "generateLowerCaseLetter",
+    value: function generateLowerCaseLetter() {
+      var number = Math.floor(Math.random() * (122 - 97) + 97);
+      var letterLowerCase = String.fromCharCode(number);
+      return letterLowerCase;
+    }
+  }, {
+    key: "generateSymbols",
+    value: function generateSymbols() {
+      var number = Math.floor(Math.random() * (47 - 33) + 33);
+      var symbols = String.fromCharCode(number);
+      return symbols;
+    }
+  }, {
+    key: "setAddedNumbers",
+    value: function setAddedNumbers(isAddedNumbers) {
+      this.isAddedNumbers = isAddedNumbers;
+    }
+  }, {
+    key: "setAddedUpperCaseLetter",
+    value: function setAddedUpperCaseLetter(isAddedUpperCaseLetter) {
+      this.isAddedUpperCaseLetter = isAddedUpperCaseLetter;
+    }
+  }, {
+    key: "setAddedLowerCaseLetter",
+    value: function setAddedLowerCaseLetter(isAddedLowerCaseLetter) {
+      this.isAddedLowerCaseLetter = isAddedLowerCaseLetter;
+    }
+  }, {
+    key: "setAddedSymbols",
+    value: function setAddedSymbols(isAddedSymbols) {
+      this.isAddedSymbols = isAddedSymbols;
+    }
+  }, {
+    key: "getCheckedAnythingGenerated",
+    value: function getCheckedAnythingGenerated() {
+      return !isAddedNumbers && !isAddedUpperCaseLetter && !isAddedLowerCaseLetter && !isAddedSymbols;
+    }
+  }]);
+  return PasswordMethods;
+}();
+
+/***/ }),
+
 /***/ "./src/modules/validate_cpf.js":
 /*!*************************************!*\
   !*** ./src/modules/validate_cpf.js ***!
@@ -175,7 +279,57 @@ ___CSS_LOADER_EXPORT___.push([module.id, `* {
 
   color: white;
   font-weight: bold;
-}`, "",{"version":3,"sources":["webpack://./src/assets/global.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,aAAa;;EAEb,iBAAiB;AACnB;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,gBAAgB;;EAEhB,YAAY;EACZ,iBAAiB;AACnB","sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.main {\r\n  width: 100%;\r\n  height: 100vh;\r\n\r\n  background: black;\r\n}\r\n\r\n.main h1 {\r\n  color: white;\r\n}\r\n\r\n.result-cpf {\r\n  margin-top: 2rem;\r\n\r\n  color: white;\r\n  font-weight: bold;\r\n}"],"sourceRoot":""}]);
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .box {
+  background: white;
+
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.box h1 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.box p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.box button {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem;
+  justify-content:center;
+
+  margin-top: 1rem;
+  border-radius: 12px;
+  border: none;
+  background: #d665d7;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: filter 0.2s;
+
+  &:hover {
+   filter: brightness(0.9)
+  }
+}
+`, "",{"version":3,"sources":["webpack://./src/assets/global.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,aAAa;;EAEb,iBAAiB;AACnB;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,gBAAgB;;EAEhB,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,WAAW;EACX,aAAa;;EAEb,iBAAiB;EACjB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;AACzB;;AAEA;EACE,iBAAiB;;EAEjB,qBAAqB;EACrB,aAAa;EACb,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;EACjB,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,WAAW;EACX,eAAe;EACf,sBAAsB;;EAEtB,gBAAgB;EAChB,mBAAmB;EACnB,YAAY;EACZ,mBAAmB;EACnB,WAAW;EACX,iBAAiB;EACjB,eAAe;EACf,eAAe;EACf,uBAAuB;;EAEvB;GACC;EACD;AACF","sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.main {\r\n  width: 100%;\r\n  height: 100vh;\r\n\r\n  background: black;\r\n}\r\n\r\n.main h1 {\r\n  color: white;\r\n}\r\n\r\n.result-cpf {\r\n  margin-top: 2rem;\r\n\r\n  color: white;\r\n  font-weight: bold;\r\n}\r\n\r\n.container {\r\n  width: 100%;\r\n  height: 100vh;\r\n\r\n  background: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.container .box {\r\n  background: white;\r\n\r\n  display: inline-block;\r\n  padding: 1rem;\r\n  border-radius: 10px;\r\n}\r\n\r\n.box h1 {\r\n  font-weight: bold;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.box p {\r\n  margin-top: 1rem;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.box button {\r\n  display: flex;\r\n  width: 100%;\r\n  padding: 0.5rem;\r\n  justify-content:center;\r\n\r\n  margin-top: 1rem;\r\n  border-radius: 12px;\r\n  border: none;\r\n  background: #d665d7;\r\n  color: #fff;\r\n  font-weight: bold;\r\n  font-size: 1rem;\r\n  cursor: pointer;\r\n  transition: filter 0.2s;\r\n\r\n  &:hover {\r\n   filter: brightness(0.9)\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -704,12 +858,19 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_generate_cpf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/generate-cpf */ "./src/modules/generate-cpf.js");
 /* harmony import */ var _assets_global_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/global.css */ "./src/assets/global.css");
+/* harmony import */ var _modules_password_methods__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/password-methods */ "./src/modules/password-methods.js");
+
 
 
 (function () {
   var generate = new _modules_generate_cpf__WEBPACK_IMPORTED_MODULE_0__.GenerateCPF();
   var elementGenerate = document.querySelector('.result-cpf');
-  elementGenerate.innerHTML = generate.generate();
+  if (elementGenerate) {
+    elementGenerate.innerHTML = generate.generate();
+  }
+})();
+(function () {
+  var generate = new _modules_password_methods__WEBPACK_IMPORTED_MODULE_2__.PasswordMethods();
 })();
 })();
 

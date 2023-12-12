@@ -1,10 +1,16 @@
 import { GenerateCPF } from './modules/generate-cpf'
 
 import './assets/global.css'
+import { PasswordMethods } from './modules/password-methods'
 ;(() => {
   const generate = new GenerateCPF()
 
   const elementGenerate = document.querySelector('.result-cpf')
 
-  elementGenerate.innerHTML = generate.generate()
+  if (elementGenerate) {
+    elementGenerate.innerHTML = generate.generate()
+  }
+})()
+;(() => {
+  const generate = new PasswordMethods()
 })()
