@@ -1,5 +1,7 @@
 import { GenerateCPF } from './modules/generate-cpf'
 
+import 'regenerator-runtime/runtime'
+
 import './assets/global.css'
 import { PasswordMethods } from './modules/password-methods'
 ;(() => {
