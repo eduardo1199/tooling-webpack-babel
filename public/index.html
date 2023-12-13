@@ -12,29 +12,29 @@
         Gerador de senhas
       </h1>
 
-      <p></p>
+      <p class="password"></p>
 
-      <div class="input-select">
+      <div>
         Quantidade de caracteres
-        <input type="number">
+        <input type="number" min="0" max="30" class="input-character">
       </div>
-      <div class="input-select">
+      <div>
         Adicionar números 
-        <input type="checkbox">
+        <input type="checkbox" class="input-add-numbers">
       </div>
-      <div class="input-select">
+      <div>
         Letras maiúsculas 
-        <input type="checkbox">
+        <input type="checkbox" class="input-add-letter-uppercase">
       </div>
-      <div class="input-select">
+      <div>
         Letras minúsculas 
-        <input type="checkbox">
+        <input type="checkbox" class="input-add-letter-lowercase">
       </div>
-      <div class="input-select">
+      <div>
         Letras símbolos 
-        <input type="checkbox">
+        <input type="checkbox" class="input-add-symbols">
       </div>
-      <button>Gerar</button>
+      <button class="generate-button">Gerar</button>
     </div>
   </main>
   <script src="./assets/js/bundle.js"></script>

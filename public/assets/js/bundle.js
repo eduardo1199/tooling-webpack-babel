@@ -79,50 +79,65 @@ var PasswordMethods = /*#__PURE__*/function () {
     _defineProperty(this, "isAddedUpperCaseLetter", false);
     _defineProperty(this, "isAddedLowerCaseLetter", false);
     _defineProperty(this, "isAddedSymbols", false);
-    this.password = password;
+    this.password = password !== null && password !== void 0 ? password : '';
   }
   _createClass(PasswordMethods, [{
     key: "generatePassword",
     value: function generatePassword(maxQuantityOfCharacters) {
-      for (var i = 0; i < maxQuantityOfCharacters; i++) {
+      if (this.password) {
+        this.password = '';
+      }
+      while (true) {
         if (this.isAddedNumbers) {
-          this.password += this.generateNumbers();
+          this.password += this.getGenerateNumbers();
+          if (this.password.length === maxQuantityOfCharacters) {
+            break;
+          }
         }
         if (this.isAddedUpperCaseLetter) {
-          this.password += this.generateUpperCaseLetter();
+          this.password += this.getGenerateUpperCaseLetter();
+          if (this.password.length === maxQuantityOfCharacters) {
+            break;
+          }
         }
         if (this.isAddedLowerCaseLetter) {
-          this.password += this.isAddedLowerCaseLetter();
+          this.password += this.getGenerateLowerCaseLetter();
+          if (this.password.length === maxQuantityOfCharacters) {
+            break;
+          }
         }
         if (this.isAddedSymbols) {
-          this.password += this.isAddedSymbols();
+          this.password += this.getGenerateSymbols();
+          if (this.password.length === maxQuantityOfCharacters) {
+            break;
+          }
         }
       }
       return this.password;
     }
   }, {
-    key: "generateNumbers",
-    value: function generateNumbers() {
+    key: "getGenerateNumbers",
+    value: function getGenerateNumbers() {
       var number = Math.floor(Math.random() * (10 - 0) + 0);
       return String(number);
     }
   }, {
-    key: "generateUpperCaseLetter",
-    value: function generateUpperCaseLetter() {
+    key: "getGenerateUpperCaseLetter",
+    value: function getGenerateUpperCaseLetter() {
       var number = Math.floor(Math.random() * (90 - 65) + 65);
       var letterUpperCase = String.fromCharCode(number);
       return letterUpperCase;
     }
   }, {
-    key: "generateLowerCaseLetter",
-    value: function generateLowerCaseLetter() {
+    key: "getGenerateLowerCaseLetter",
+    value: function getGenerateLowerCaseLetter() {
       var number = Math.floor(Math.random() * (122 - 97) + 97);
       var letterLowerCase = String.fromCharCode(number);
       return letterLowerCase;
     }
   }, {
-    key: "generateSymbols",
-    value: function generateSymbols() {
+    key: "getGenerateSymbols",
+    value: function getGenerateSymbols() {
       var number = Math.floor(Math.random() * (47 - 33) + 33);
       var symbols = String.fromCharCode(number);
       return symbols;
@@ -150,7 +165,7 @@ var PasswordMethods = /*#__PURE__*/function () {
   }, {
     key: "getCheckedAnythingGenerated",
     value: function getCheckedAnythingGenerated() {
-      return !isAddedNumbers && !isAddedUpperCaseLetter && !isAddedLowerCaseLetter && !isAddedSymbols;
+      return !this.isAddedNumbers && !this.isAddedUpperCaseLetter && !this.isAddedLowerCaseLetter && !this.isAddedSymbols;
     }
   }]);
   return PasswordMethods;
@@ -871,6 +886,40 @@ __webpack_require__.r(__webpack_exports__);
 })();
 (function () {
   var generate = new _modules_password_methods__WEBPACK_IMPORTED_MODULE_2__.PasswordMethods();
+  var passwordElement = document.querySelector('.password');
+  var buttonGeneratePasswordElement = document.querySelector('.generate-button');
+  var inputAddNumbersElement = document.querySelector('.input-add-numbers');
+  var inputAddLetterUpperCase = document.querySelector('.input-add-letter-uppercase');
+  var inputAddLetterLowerCase = document.querySelector('.input-add-letter-lowercase');
+  var inputAddSymbols = document.querySelector('.input-add-symbols');
+  inputAddNumbersElement.addEventListener('change', function (event) {
+    var isChecked = event.target.checked;
+    generate.setAddedNumbers(isChecked);
+  });
+  inputAddLetterUpperCase.addEventListener('change', function (event) {
+    var isChecked = event.target.checked;
+    generate.setAddedUpperCaseLetter(isChecked);
+  });
+  inputAddLetterLowerCase.addEventListener('change', function (event) {
+    var isChecked = event.target.checked;
+    generate.setAddedLowerCaseLetter(isChecked);
+  });
+  inputAddSymbols.addEventListener('change', function (event) {
+    var isChecked = event.target.checked;
+    generate.setAddedSymbols(isChecked);
+  });
+  if (passwordElement) {
+    buttonGeneratePasswordElement.addEventListener('click', function () {
+      var inputQuantityCharacterPassword = document.querySelector('.input-character');
+      var quantityCharacterPassword = Number(inputQuantityCharacterPassword.value);
+      console.log(quantityCharacterPassword);
+      if (!generate.getCheckedAnythingGenerated() && quantityCharacterPassword !== 0) {
+        passwordElement.innerHTML = generate.generatePassword(quantityCharacterPassword);
+      } else {
+        alert('Please enter on option generate password!');
+      }
+    });
+  }
 })();
 })();
 

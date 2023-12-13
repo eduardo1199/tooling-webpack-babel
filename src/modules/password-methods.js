@@ -6,38 +6,58 @@ export class PasswordMethods {
   isAddedSymbols = false
 
   constructor(password) {
-    this.password = password
+    this.password = password ?? ''
   }
 
   generatePassword(maxQuantityOfCharacters) {
-    for (let i = 0; i < maxQuantityOfCharacters; i++) {
+    if (this.password) {
+      this.password = ''
+    }
+
+    while (true) {
       if (this.isAddedNumbers) {
-        this.password += this.generateNumbers()
+        this.password += this.getGenerateNumbers()
+
+        if (this.password.length === maxQuantityOfCharacters) {
+          break
+        }
       }
 
       if (this.isAddedUpperCaseLetter) {
-        this.password += this.generateUpperCaseLetter()
+        this.password += this.getGenerateUpperCaseLetter()
+
+        if (this.password.length === maxQuantityOfCharacters) {
+          break
+        }
       }
 
       if (this.isAddedLowerCaseLetter) {
-        this.password += this.isAddedLowerCaseLetter()
+        this.password += this.getGenerateLowerCaseLetter()
+
+        if (this.password.length === maxQuantityOfCharacters) {
+          break
+        }
       }
 
       if (this.isAddedSymbols) {
-        this.password += this.isAddedSymbols()
+        this.password += this.getGenerateSymbols()
+
+        if (this.password.length === maxQuantityOfCharacters) {
+          break
+        }
       }
     }
 
     return this.password
   }
 
-  generateNumbers() {
+  getGenerateNumbers() {
     const number = Math.floor(Math.random() * (10 - 0) + 0)
 
     return String(number)
   }
 
-  generateUpperCaseLetter() {
+  getGenerateUpperCaseLetter() {
     const number = Math.floor(Math.random() * (90 - 65) + 65)
 
     const letterUpperCase = String.fromCharCode(number)
@@ -45,7 +65,7 @@ export class PasswordMethods {
     return letterUpperCase
   }
 
-  generateLowerCaseLetter() {
+  getGenerateLowerCaseLetter() {
     const number = Math.floor(Math.random() * (122 - 97) + 97)
 
     const letterLowerCase = String.fromCharCode(number)
@@ -53,7 +73,7 @@ export class PasswordMethods {
     return letterLowerCase
   }
 
-  generateSymbols() {
+  getGenerateSymbols() {
     const number = Math.floor(Math.random() * (47 - 33) + 33)
 
     const symbols = String.fromCharCode(number)
@@ -79,10 +99,10 @@ export class PasswordMethods {
 
   getCheckedAnythingGenerated() {
     return (
-      !isAddedNumbers &&
-      !isAddedUpperCaseLetter &&
-      !isAddedLowerCaseLetter &&
-      !isAddedSymbols
+      !this.isAddedNumbers &&
+      !this.isAddedUpperCaseLetter &&
+      !this.isAddedLowerCaseLetter &&
+      !this.isAddedSymbols
     )
   }
 }
